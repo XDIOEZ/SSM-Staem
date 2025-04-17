@@ -39,8 +39,7 @@ public class UserController {
      * @return ServerResponse 包含用户信息或错误信息的响应对象
      */
     @RequestMapping(value = "/checkUser.do", method = RequestMethod.POST)
-    @ResponseBody
-    public ServerResponse<UserEntity> checkUser(
+    public String checkUser(
             @RequestParam("id") String id,
             @RequestParam("username") String username,
             @RequestParam("password") String password) {
@@ -50,12 +49,19 @@ public class UserController {
         userEntity.setUsername(username);
         userEntity.setPassword(password);
 
-        if (userEntity != null) {
+        if (userEntity != null)
+        {
             // 调用服务层进行登录验证
-            return userService.checkLogin(userEntity);
-        } else {
-            return ServerResponse.createByErrorMessage("用户实体对象为空，登录验证失败");
+            if (userService.checkLogin(userEntity) != null)
+            {
+                return "Main";
+            }
+            else
+            {
+                return "loginFail";
+            }
         }
+        return "loginFail";
     }
 
     @RequestMapping(value = "/findById.do", method = RequestMethod.POST)
