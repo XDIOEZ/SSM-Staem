@@ -1,6 +1,7 @@
 package com.ssmdemo.dao;
 
 import com.ssmdemo.dao.entity.GameEntity;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -29,5 +30,8 @@ public interface GameDao {
             "FROM game " +
             "WHERE comment LIKE CONCAT('%', #{comment}, '%')")
     List<GameEntity> selectGameByComment(@Param("comment") String comment);
+
+    @Insert("INSERT INTO user_game (user_id, game_id) VALUES (#{user_Id}, #{game_ID})")
+    void buyGame(@Param("user_Id") int user_id, @Param("game_ID") int game_ID);
 
 }

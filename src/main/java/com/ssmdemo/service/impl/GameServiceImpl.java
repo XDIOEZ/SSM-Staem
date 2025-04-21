@@ -1,5 +1,7 @@
 package com.ssmdemo.service.impl;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import com.ssmdemo.common.ServerResponse;
 import com.ssmdemo.dao.GameDao;
 import com.ssmdemo.dao.UserDao;
 import com.ssmdemo.dao.entity.GameEntity;
@@ -32,4 +34,12 @@ public class GameServiceImpl implements GameService {
     public List<GameEntity> FindByPartialComment(String keyString) {
         return gameDao.selectGameByComment(keyString); // 确保 gameDao 正常初始化
     }
+
+    @Override
+    public ServerResponse BuyGame(int userId, int gameId) {
+        gameDao.buyGame(userId, gameId);
+        // 如果插入成功，返回成功信息
+        return ServerResponse.createBySuccess("购买成功！");
+    }
+
 }

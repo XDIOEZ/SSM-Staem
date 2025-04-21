@@ -29,6 +29,7 @@
         <th>Description</th>
         <th>Comment</th>
         <th>Pictures</th>
+        <th>操作</th>
     </tr>
     <%
         for (GameEntity game : gameEntities) {
@@ -39,12 +40,27 @@
         <td><%= game.getPrice() %></td>
         <td><%= game.getDescription() %></td>
         <td><%= game.getComment() %></td>
-        <td><%= game.getPictures() %></td>
+        <td>
+            <img src="<%= game.getPictures() %>"
+                 alt="Game Image"
+                 width="100"
+                 height="100"
+                 style="object-fit: contain; background-color: #f0f0f0; display: block;"
+                 referrerpolicy="no-referrer"/>
+        </td>
+
+        <td>
+            <form action="${pageContext.request.contextPath}/game/buyGame.do" method="post">
+                <input type="hidden" name="gameId" value="<%= game.getId() %>" />
+                <input type="submit" value="购买" />
+            </form>
+        </td>
     </tr>
     <%
         }
     %>
 </table>
+
 <%
 } else {
 %>

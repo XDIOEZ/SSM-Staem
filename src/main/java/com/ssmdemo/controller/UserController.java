@@ -4,11 +4,15 @@ import com.ssmdemo.common.ServerResponse;
 import com.ssmdemo.dao.entity.UserEntity;
 import com.ssmdemo.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +34,7 @@ public class UserController {
     @Autowired
     private UserEntity userEntity; // 用户实体类（注意：此处可能存在线程安全风险，建议改用方法参数传递）
 
+
     /**
      * 用户登录验证接口
      *
@@ -42,7 +47,8 @@ public class UserController {
     public String checkUser(
             @RequestParam("id") String id,
             @RequestParam("username") String username,
-            @RequestParam("password") String password) {
+            @RequestParam("password") String password,
+            HttpServletRequest request) {
 
         // 将参数设置到实体对象中
         userEntity.setId(Integer.parseInt(id));
@@ -51,13 +57,17 @@ public class UserController {
 
         if (userEntity != null)
         {
-            // 调用服务层进行登录验证
-            if (userService.checkLogin(userEntity) != null)
-            {
+            UserEntity user = new UserEntity();
+            user.setId(Integer.parseInt(id));
+            user.setUsername(username);
+            user.setPassword(password);
+
+            if (userService.checkLogin(user) != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("userId", user.getId());
+                session.setAttribute("username", user.getUsername());
                 return "Main";
-            }
-            else
-            {
+            } else {
                 return "loginFail";
             }
         }
