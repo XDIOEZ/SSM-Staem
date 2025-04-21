@@ -33,18 +33,9 @@
 </head>
 <body>
 
-<td>
-  <img src="<%= "${pageContext.request.contextPath}/jsp/getMoney.jpg" %>"
-       alt="Game Image"
-       width="100"
-       height="100"
-       style="object-fit: contain; background-color: #f0f0f0; display: block;"
-       referrerpolicy="no-referrer"/>
-</td>
+<img src="${pageContext.request.contextPath}/images/getMoney.jpg" width="216" height="324"/>
 
-<img src="${pageContext.request.contextPath}/jsp/getMoney.jpg" width="216" height="324"/>
-
-<a href="${pageContext.request.contextPath}/jsp/Main.jsp" class="btn">返回首页</a>
+<a href="${pageContext.request.contextPath}/jsp/Main.jsp" class="btn">已支付--返回首页</a>
 
 </body>
 </html>

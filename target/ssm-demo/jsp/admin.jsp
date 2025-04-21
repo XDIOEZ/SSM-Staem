@@ -42,19 +42,23 @@
             opacity: 0.5;
         }
 
-        .add-user-btn {
+        .btn {
             display: inline-block;
             background-color: var(--button-color);
             color: white;
-            padding: 0.7rem 1.5rem;
-            text-decoration: none;
+            padding: 0.8rem 1.5rem;
             border-radius: 4px;
             font-weight: 600;
             transition: all 0.3s;
-            margin: 1rem 0;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            white-space: nowrap;
+            text-align: center;
         }
 
-        .add-user-btn:hover {
+        .btn:hover {
             background-color: var(--button-hover);
             transform: translateY(-2px);
         }
@@ -65,8 +69,9 @@
             border-radius: 8px;
             margin-bottom: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            max-width: 800px; /* 添加最大宽度限制 */
+            max-width: 800px;
         }
+
         label {
             display: block;
             margin-bottom: 0.5rem;
@@ -81,25 +86,30 @@
             align-items: center;
             gap: 1rem;
             width: 100%;
-            max-width: 100%; /* 确保不超过父容器 */
-            position: relative; /* 为子元素定位参考 */
+            max-width: 100%;
+            position: relative;
         }
 
         input[type="text"] {
-            flex: 1 1 300px; /* 基础300px，可伸缩 */
-            min-width: 0; /* 关键！允许缩小到小于200px */
-            width: 100%; /* 确保不超过flex容器分配的空间 */
-            max-width: 100%; /* 双重保险 */
+            flex: 1 1 300px;
+            min-width: 0;
+            width: 100%;
+            max-width: 100%;
             padding: 0.8rem;
             background-color: var(--input-bg-color);
             border: 1px solid rgba(102, 192, 244, 0.2);
             border-radius: 4px;
             color: var(--text-color);
             font-size: 1rem;
-            box-sizing: border-box; /* 包含padding和border在宽度内 */
+            box-sizing: border-box;
         }
 
-        /* 响应式调整 */
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(102, 192, 244, 0.2);
+        }
+
         @media (max-width: 600px) {
             .form-group {
                 flex-direction: column;
@@ -107,27 +117,13 @@
             }
 
             input[type="text"] {
-                flex-basis: 100%; /* 小屏幕下占满宽度 */
-                min-width: 100%; /* 覆盖之前的min-width */
+                flex-basis: 100%;
+                min-width: 100%;
             }
-        }
 
-        button {
-            background-color: var(--button-color);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-
-        button:hover {
-            background-color: var(--button-hover);
-            transform: translateY(-2px);
+            .btn {
+                width: 100%;
+            }
         }
 
         @media (max-width: 768px) {
@@ -136,31 +132,24 @@
                 align-items: stretch;
             }
 
-            input[type="text"], button {
+            input[type="text"], .btn {
                 width: 100%;
             }
         }
     </style>
 </head>
 
-
 <body>
 <h2>用户管理</h2>
-<a href="${pageContext.request.contextPath}/jsp/userRig.jsp">添加用户</a>
-</body>
+<a href="${pageContext.request.contextPath}/jsp/userRig.jsp" class="btn">添加用户</a>
 
-<body>
 <h2>查找用户</h2>
 <form action="${pageContext.request.contextPath}/user/findById.do" method="post">
-
     <div class="form-group">
         <label for="id">身份码</label>
         <input type="text" id="id" name="id" placeholder="输入您的身份码" autocomplete="username" required>
-
-    <button type="submit">查找</button>
+        <button type="submit" class="btn">查找</button>
     </div>
-
 </form>
 </body>
-
 </html>
