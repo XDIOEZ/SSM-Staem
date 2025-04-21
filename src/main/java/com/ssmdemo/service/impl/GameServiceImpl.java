@@ -41,5 +41,10 @@ public class GameServiceImpl implements GameService {
         // 如果插入成功，返回成功信息
         return ServerResponse.createBySuccess("购买成功！");
     }
+    @Override
+    public List<GameEntity> findGamesByUserId(int userId) {
+        return gameDao.findGamesByUserId(userId);
+    }
+
 
 }

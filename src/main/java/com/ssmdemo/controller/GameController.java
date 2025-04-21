@@ -40,6 +40,25 @@ public class GameController {
         return "GameSearchShow"; // 显示 userDetail.jsp 页面
     }
 
+    @RequestMapping(value = "/findGameByUser.do", method = RequestMethod.POST)
+    public String findGameByUser(HttpSession session, Model model) {
+        // 从 session 中获取用户 ID
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null) {
+            model.addAttribute("errorMessage", "请先登录！");
+            return "login"; // 未登录，重定向到登录页面
+        }
+
+        // 查询该用户拥有的游戏列表
+        List<GameEntity> ownedGames = gameService.findGamesByUserId(userId);
+
+        model.addAttribute("gameList", ownedGames);
+        model.addAttribute("gameCount", ownedGames != null ? ownedGames.size() : 0);
+        return "userStock"; // 显示 JSP 页面 userInventory.jsp
+    }
+
+
     @RequestMapping(value = "/FindByPartialName.do", method = RequestMethod.POST)
     public String FindByPartialName(@RequestParam("name") String name, Model model) {
 

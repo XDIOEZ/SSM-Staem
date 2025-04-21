@@ -8,7 +8,9 @@
 <ul>
     <li><a href="${pageContext.request.contextPath}/jsp/gameShop.jsp">前往商店页面</a></li>
     <li><a href="${pageContext.request.contextPath}/jsp/userData.jsp">前往用户页面</a></li>
-    <li><a href="${pageContext.request.contextPath}/jsp/userStock.jsp">前往库存页面</a></li>
+    <form action="${pageContext.request.contextPath}/game/findGameByUser.do" method="post">
+        <input type="submit" value="查看我的库存"/>
+    </form>
 </ul>
 </body>
 </html>

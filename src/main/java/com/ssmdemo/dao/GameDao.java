@@ -34,4 +34,7 @@ public interface GameDao {
     @Insert("INSERT INTO user_game (user_id, game_id) VALUES (#{user_Id}, #{game_ID})")
     void buyGame(@Param("user_Id") int user_id, @Param("game_ID") int game_ID);
 
+    @Select("SELECT g.* FROM game g JOIN user_game ug ON g.id = ug.game_id WHERE ug.user_id = #{userId}")
+    List<GameEntity> findGamesByUserId(@Param("userId") int userId);
+
 }

@@ -14,4 +14,7 @@ public interface GameService {
     public List<GameEntity> FindByPartialComment(String keyString);
 
     public ServerResponse BuyGame(int userID, int GameId);
+
+    public List<GameEntity> findGamesByUserId(int userId) ;
+
 }

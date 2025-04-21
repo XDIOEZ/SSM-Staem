@@ -32,8 +32,7 @@
   </style>
 </head>
 <body>
-
-<img src="${pageContext.request.contextPath}/images/getMoney.jpg" width="216" height="324"/>
+<img src="https://raw.githubusercontent.com/XDIOEZ/SSM-Staem/refs/heads/main/src/main/webapp/images/getMoney.jpg" width="216" height="324"/>
 
 <a href="${pageContext.request.contextPath}/jsp/Main.jsp" class="btn">已支付--返回首页</a>
 

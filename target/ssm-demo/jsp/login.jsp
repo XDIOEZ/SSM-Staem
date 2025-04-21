@@ -259,9 +259,6 @@
 <div class="logo-container">
     <h1 class="logo">Staem管家</h1>
 </div>
-
-<img src="${pageContext.request.contextPath}/images/getMoney.jpg" width="216" height="324" alt="i"/>
-
 <div class="login-container">
     <div class="login-title">欢迎回来</div>
 
