@@ -111,23 +111,40 @@
         <form action="${pageContext.request.contextPath}/game/findGameByUser.do" method="post">
             <input type="submit" value="查看我的库存"/>
         </form>
+
+        <form action="${pageContext.request.contextPath}/user/mainPage.do" method="get" style="margin-bottom: 1rem;">
+            <button type="submit" style="padding: 0.5rem 1rem; background-color: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer;">
+                刷新推荐
+            </button>
+        </form>
+
+
     </div>
 </div>
 
-<c:forEach var="game" items="${randomGames}">
-    <div style="background-color: #2a475e; padding: 1rem; border-radius: 8px; width: 200px;">
-        <img src="${game.pictures}" alt="游戏图片" referrerpolicy="no-referrer"
-             style="width: 100%; height: 120px; object-fit: cover; border-radius: 4px;">
-        <h3 style="margin: 0.5rem 0 0.3rem 0; color: white;">${game.name}</h3>
-        <p style="color: #c7d5e0;">￥${game.price}</p>
+<div style="margin-left: var(--sidebar-width); padding: 1rem;">
+    <!-- Recommendations container on the right -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-left: 260px;">
+        <c:forEach var="game" items="${randomGames}">
+            <div style="background-color: #2a475e; padding: 1rem; border-radius: 8px;">
+                <img src="${game.pictures}" alt="游戏图片" referrerpolicy="no-referrer"
+                     style="width: 100%; height: 120px; object-fit: contain; border-radius: 4px;">
+                <h3 style="margin: 0.5rem 0 0.3rem 0; color: white;">${game.name}</h3>
+                <p style="color: #c7d5e0;">￥${game.price}</p>
 
-        <!-- 添加“查看详细”按钮 -->
-        <form action="${pageContext.request.contextPath}/game/findGameByName.do" method="post" style="margin-top: 0.5rem;">
-            <input type="hidden" name="name" value="${game.name}"/>
-            <input type="submit" value="查看详细"/>
-        </form>
+                <!-- "查看详细" button -->
+                <form action="${pageContext.request.contextPath}/game/findGameByName.do" method="post" style="margin-top: 0.5rem;">
+                    <input type="hidden" name="name" value="${game.name}"/>
+                    <input type="submit" value="查看详细"/>
+                </form>
+            </div>
+        </c:forEach>
     </div>
-</c:forEach>
+</div>
+
+
+
+
 
 </body>
 
