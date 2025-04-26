@@ -31,15 +31,6 @@
         WHERE name = #{name};
     </update>
 
-    <select id="selectGameByName" parameterType="String" resultType="com.ssmdemo.dao.entity.GameEntity">
-        SELECT
-            id, name, price, description, comment, pictures
-        FROM
-            game
-        WHERE
-            name = #{name};
-    </select>
-
     <select id="selectGameByPartialName" parameterType="String" resultType="com.ssmdemo.dao.entity.GameEntity">
         SELECT
             id, name, price, description, comment, pictures

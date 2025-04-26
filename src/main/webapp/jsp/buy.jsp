@@ -75,7 +75,7 @@
 </div>
 
 <div class="button-container">
-  <a href="${pageContext.request.contextPath}/jsp/Main.jsp" class="btn">已支付--返回首页</a>
+  <a href="${pageContext.request.contextPath}/user/mainPage.do" class="btn">已支付--返回首页</a>
 </div>
 </body>
 </html>

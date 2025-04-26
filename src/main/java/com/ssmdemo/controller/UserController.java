@@ -66,13 +66,14 @@ public class UserController {
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getId());
                 session.setAttribute("username", user.getUsername());
-                return "Main";
+                return "redirect:mainPage.do";
             } else {
                 return "loginFail";
             }
         }
         return "loginFail";
     }
+
 
     @RequestMapping(value = "/findById.do", method = RequestMethod.POST)
     public String findById(@RequestParam("id") String id, Model model) {

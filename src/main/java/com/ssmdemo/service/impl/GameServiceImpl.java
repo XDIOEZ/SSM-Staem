@@ -46,5 +46,10 @@ public class GameServiceImpl implements GameService {
         return gameDao.findGamesByUserId(userId);
     }
 
+    @Override
+    public List<GameEntity> getRandomGames(int count) {
+        return gameDao.RandomGetGames(count);
+    }
+
 
 }

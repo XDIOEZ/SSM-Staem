@@ -17,8 +17,8 @@ public interface GameDao {
     // 根据 Name 更新游戏
     void updateGameByName(GameEntity gameEntity);
 
-    // 根据 Name 查询游戏
-    GameEntity selectGameByName(String name);
+    @Select("SELECT * FROM game WHERE name = #{name}")
+    GameEntity selectGameByName(@Param("name") String name);
 
     // 根据部分 Name 模糊查询
     List<GameEntity> selectGameByPartialName(String name);
@@ -36,5 +36,8 @@ public interface GameDao {
 
     @Select("SELECT g.* FROM game g JOIN user_game ug ON g.id = ug.game_id WHERE ug.user_id = #{userId}")
     List<GameEntity> findGamesByUserId(@Param("userId") int userId);
+
+    @Select("SELECT * FROM game ORDER BY RAND() LIMIT #{limit}")
+    List<GameEntity> RandomGetGames(@Param("limit") int limit);
 
 }

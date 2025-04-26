@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -95,6 +96,7 @@
     </style>
 </head>
 <body>
+<!-- 侧边栏 -->
 <div class="sidebar">
     <div class="sidebar-header">
         <h2>游戏分发平台</h2>
@@ -112,5 +114,21 @@
     </div>
 </div>
 
+<c:forEach var="game" items="${randomGames}">
+    <div style="background-color: #2a475e; padding: 1rem; border-radius: 8px; width: 200px;">
+        <img src="${game.pictures}" alt="游戏图片" referrerpolicy="no-referrer"
+             style="width: 100%; height: 120px; object-fit: cover; border-radius: 4px;">
+        <h3 style="margin: 0.5rem 0 0.3rem 0; color: white;">${game.name}</h3>
+        <p style="color: #c7d5e0;">￥${game.price}</p>
+
+        <!-- 添加“查看详细”按钮 -->
+        <form action="${pageContext.request.contextPath}/game/findGameByName.do" method="post" style="margin-top: 0.5rem;">
+            <input type="hidden" name="name" value="${game.name}"/>
+            <input type="submit" value="查看详细"/>
+        </form>
+    </div>
+</c:forEach>
+
 </body>
+
 </html>

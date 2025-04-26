@@ -109,5 +109,24 @@ public class GameController {
         return "buy";
     }
 
+    @RequestMapping(value = "/randomGames.do", method = RequestMethod.GET)
+    public String getRandomGames(@RequestParam(value = "limit", defaultValue = "10") int limit,
+                                 Model model) {
+
+        try {
+            // 调用服务层获取随机游戏列表
+            List<GameEntity> randomGames = gameService.getRandomGames(limit);
+            // 把结果添加到模型中，用于页面展示
+            model.addAttribute("randomGames", randomGames);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "获取随机游戏失败：" + e.getMessage());
+        }
+
+        // 返回展示随机游戏的页面，比如 random_games.jsp 或 random_games.html
+        return "Main";
+    }
+
+
+
 
 }

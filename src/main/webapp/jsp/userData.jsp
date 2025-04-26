@@ -114,7 +114,7 @@
     </div>
 
     <div class="user-actions">
-        <a href="Main.jsp">返回主页面</a>
+        <a href="${pageContext.request.contextPath}/user/mainPage.do">返回主页面</a>
     </div>
 </div>
 </body>

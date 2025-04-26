@@ -33,6 +33,6 @@
     </table>
 </c:if>
 
-<a href="${pageContext.request.contextPath}/jsp/Main.jsp">返回主页面</a>
+<a href="${pageContext.request.contextPath}/user/mainPage.do">返回主页面</a>
 </body>
 </html>

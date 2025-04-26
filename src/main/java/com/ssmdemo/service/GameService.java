@@ -17,4 +17,6 @@ public interface GameService {
 
     public List<GameEntity> findGamesByUserId(int userId) ;
 
+    public List<GameEntity> getRandomGames(int count);
+
 }
