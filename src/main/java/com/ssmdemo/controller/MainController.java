@@ -25,4 +25,10 @@ public class MainController {
         model.addAttribute("randomGames", randomGames);
         return "Main"; // 对应你的主页面 JSP，比如叫 mainPage.jsp
     }
+
+    @RequestMapping(value = "/Login_Administer.do", method = RequestMethod.GET)
+    public String Login_Administer(Model model) {
+
+        return "Main"; // 对应你的主页面 JSP，比如叫 mainPage.jsp
+    }
 }

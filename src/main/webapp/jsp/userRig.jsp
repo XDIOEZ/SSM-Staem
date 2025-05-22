@@ -259,7 +259,7 @@
         <div class="form-row">
             <div class="form-label">密码:</div>
             <div class="form-input">
-                <input id="password" name="password" type="password">
+                <input name="password" type="password">
             </div>
         </div>
 

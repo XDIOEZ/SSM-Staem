@@ -266,7 +266,7 @@
 
         <div class="form-group">
             <label for="password">密码：</label>
-            <input type="password" id="password" name="password" value="${user.password}" required />
+            <input type="text" id="password" name="password" value="${user.password}" required />
         </div>
 
         <input type="submit" value="应用编辑" />

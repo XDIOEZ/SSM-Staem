@@ -74,6 +74,38 @@ public class UserController {
         return "loginFail";
     }
 
+    @RequestMapping(value = "/check_Admin.do", method = RequestMethod.POST)
+    public String check_Admin(
+            @RequestParam("id") String id,
+            @RequestParam("username") String username,
+            @RequestParam("password") String password,
+            HttpServletRequest request) {
+
+        // 将参数设置到实体对象中
+        userEntity.setId(Integer.parseInt(id));
+        userEntity.setUsername(username);
+        userEntity.setPassword(password);
+
+        if (userEntity != null)
+        {
+            UserEntity user = new UserEntity();
+            user.setId(Integer.parseInt(id));
+            user.setUsername(username);
+            user.setPassword(password);
+
+            if (userService.check_Admin(user) != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("userId", user.getId());
+                session.setAttribute("username", user.getUsername());
+                return "admin";
+            }
+            else
+            {
+                return "loginFail";
+            }
+        }
+        return "loginFail";
+    }
 
     @RequestMapping(value = "/findById.do", method = RequestMethod.POST)
     public String findById(@RequestParam("id") String id, Model model) {

@@ -40,4 +40,6 @@ public interface GameDao {
     @Select("SELECT * FROM game ORDER BY RAND() LIMIT #{limit}")
     List<GameEntity> RandomGetGames(@Param("limit") int limit);
 
+
+
 }

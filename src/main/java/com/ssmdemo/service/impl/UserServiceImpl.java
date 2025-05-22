@@ -38,6 +38,21 @@ import javax.annotation.Resource;
             return ServerResponse.createByErrorMessage("login failed");
         }
 
+    public ServerResponse<UserEntity> check_Admin(UserEntity checkUserEntity)
+    {
+        userEntity = userDao.selectById_Admin(checkUserEntity.getId());
+
+        if(     userEntity != null
+                && checkUserEntity.getPassword().equals(userEntity.getPassword())
+                && checkUserEntity.getUsername().equals(userEntity.getUsername())
+        )
+        {
+            return ServerResponse.createByErrorMessage("login succes");
+        }
+        return ServerResponse.createByErrorMessage("login failed");
+    }
+
+
         @Override
         public ServerResponse<UserEntity> addUser(int id, String username, String password) {
 

@@ -296,11 +296,9 @@
         <div class="register-link">
             还没有账号? <a href="userRig.jsp">立即注册</a>
         </div>
-
         <div class="register-link">
-             <a href="admin.jsp">管理员登陆</a>
+             是管理员? <a href="admin_login.jsp">进入管理员登陆页面</a>
         </div>
-
     </form>
 </div>
 

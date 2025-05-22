@@ -13,6 +13,7 @@
             --button-color: #5c7e10;
             --button-hover: #6b8e23;
             --text-color: #c7d5e0;
+            --highlight: #4b619b;
         }
 
         body {
@@ -25,65 +26,108 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: radial-gradient(circle at 20% 30%, rgba(102, 192, 244, 0.1) 0%, transparent 30%),
-            radial-gradient(circle at 80% 70%, rgba(102, 192, 244, 0.1) 0%, transparent 30%);
+            background-image:
+                    radial-gradient(circle at 20% 30%, rgba(102, 192, 244, 0.15) 0%, transparent 30%),
+                    radial-gradient(circle at 80% 70%, rgba(102, 192, 244, 0.15) 0%, transparent 30%);
         }
 
         .user-container {
-            background-color: var(--secondary-color);
-            padding: 2rem;
-            border-radius: 8px;
-            width: 400px;
+            background: linear-gradient(145deg, var(--secondary-color), #15202b);
+            padding: 2.5rem;
+            border-radius: 12px;
+            width: 480px;
             max-width: 90%;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(102, 192, 244, 0.1);
         }
 
         .user-header {
-            color: var(--primary-color);
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .user-header h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            margin: 0 0 1rem 0;
+            background: linear-gradient(90deg, var(--primary-color), #4fa8d3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .user-content {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .user-content p {
-            margin: 1rem 0;
-            padding: 0.5rem;
-            background-color: rgba(42, 71, 94, 0.3);
-            border-radius: 4px;
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, rgba(42,71,94,0.4) 0%, rgba(27,40,56,0.6) 100%);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 1px solid rgba(102, 192, 244, 0.2);
         }
 
         .user-actions {
             text-align: center;
+            margin-top: 2rem;
         }
 
         .user-actions a {
             display: inline-block;
-            padding: 0.6rem 1.2rem;
-            background-color: var(--button-color);
+            padding: 0.8rem 1.8rem;
+            background: linear-gradient(to bottom, var(--primary-color), #4fa8d3);
             color: white;
             text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.2s;
+            border-radius: 25px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .user-actions a:hover {
-            background-color: var(--button-hover);
+            background: linear-gradient(to bottom, #4fa8d3, var(--primary-color));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
 
         .login-prompt {
             text-align: center;
-            margin: 1.5rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(42,71,94,0.4) 0%, rgba(27,40,56,0.6) 100%);
+            border-radius: 8px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .login-prompt a {
             color: var(--primary-color);
             text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
         .login-prompt a:hover {
-            text-decoration: underline;
+            color: #4fa8d3;
+            text-shadow: 0 0 8px rgba(79, 168, 211, 0.3);
+        }
+
+        .login-prompt a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            left: 0;
+            bottom: -2px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .login-prompt a:hover::after {
+            transform: scaleX(1);
         }
     </style>
 </head>

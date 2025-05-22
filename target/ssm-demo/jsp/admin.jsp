@@ -147,7 +147,7 @@
 <form action="${pageContext.request.contextPath}/user/findById.do" method="post">
     <div class="form-group">
         <label for="id">身份码</label>
-        <input type="text" id="id" name="id" placeholder="输入您的身份码" autocomplete="username" required>
+        <input type="text" id="id" name="id" placeholder="输入您想管理的身份码" autocomplete="username" required>
         <button type="submit" class="btn">查找</button>
     </div>
 </form>

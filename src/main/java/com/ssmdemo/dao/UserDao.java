@@ -1,8 +1,11 @@
 package com.ssmdemo.dao;
 
+import com.ssmdemo.dao.entity.GameEntity;
 import com.ssmdemo.dao.entity.UserEntity;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @author Barry Wang
@@ -19,5 +22,10 @@ public interface UserDao {
     UserEntity selectByid(@Param("id") int id);
 
     UserEntity selectByName(@Param("username") String username);
+
+    @Select("        SELECT *\n" +
+            "        FROM admin\n" +
+            "        WHERE id=#{id};")
+    UserEntity selectById_Admin(@Param("id") int id);
 
 }
