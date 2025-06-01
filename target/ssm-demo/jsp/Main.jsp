@@ -1,7 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>平台主界面</title>
     <style>
         :root {
@@ -12,8 +14,8 @@
             --button-hover: #6b8e23;
             --text-color: #c7d5e0;
             --highlight: #4b619b;
-            --sidebar-width: 180px;
             --card-bg: #2a475e;
+            --max-width: 1200px;
         }
 
         body {
@@ -22,51 +24,48 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
-            min-height: 100vh;
             background-image:
                     radial-gradient(circle at 20% 30%, rgba(102, 192, 244, 0.15) 0%, transparent 30%),
                     radial-gradient(circle at 80% 70%, rgba(102, 192, 244, 0.15) 0%, transparent 30%);
         }
 
-        .sidebar {
-            width: var(--sidebar-width);
+        .topbar {
+            width: 100%;
             background: linear-gradient(180deg, var(--secondary-color), #15202b);
-            height: 100vh;
-            position: fixed;
-            left: 0;
+            padding: 1rem 0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(102, 192, 244, 0.2);
+            position: sticky;
             top: 0;
-            padding: 2rem 1rem;
-            box-shadow: 4px 0 16px rgba(0, 0, 0, 0.3);
-            border-right: 1px solid rgba(102, 192, 244, 0.2);
+            z-index: 100;
         }
 
-        .sidebar-header {
+        .topbar-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 0 1.5rem;
+        }
+
+        .topbar h2 {
             color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(102, 192, 244, 0.3);
-        }
-
-        .sidebar-header h2 {
+            font-size: 1.5rem;
             margin: 0;
-            font-size: 1.4rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        .nav-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .topbar-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 0.5rem;
         }
 
-        .nav-links li {
-            margin: 1rem 0;
-        }
-
-        .nav-links a {
-            display: block;
-            padding: 0.8rem 1rem;
+        .topbar-nav a {
+            padding: 0.5rem 1rem;
             background: linear-gradient(90deg, rgba(42,71,94,0.6) 0%, rgba(27,40,56,0.8) 100%);
             color: var(--text-color);
             text-decoration: none;
@@ -75,27 +74,20 @@
             font-size: 0.95rem;
         }
 
-        .nav-links a:hover {
-            background: linear-gradient(90deg, var(--primary-color) 0%, #4fa8d3 100%);
-            transform: translateX(6px);
-        }
-
-        .form-container {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(102, 192, 244, 0.2);
+        .topbar-nav a:hover {
+            background: linear-gradient(90deg, var(--primary-color), #4fa8d3);
+            transform: translateY(-2px);
         }
 
         .form-button {
-            width: 100%;
-            padding: 0.8rem;
+            padding: 0.5rem 1rem;
             background: linear-gradient(to bottom, var(--button-color), #4a6b0f);
             color: white;
             border: none;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 0.95rem;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
 
         .form-button:hover {
@@ -104,31 +96,26 @@
         }
 
         .main-content {
-            margin-left: var(--sidebar-width);
-            padding: 2rem 3rem;
-            width: calc(100% - var(--sidebar-width));
-            max-width: 1400px;
-            margin-right: auto;
-            margin-left: auto;
+            max-width: var(--max-width);
+            margin: 2rem auto;
+            padding: 0 1.5rem;
         }
 
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
         }
 
         .game-card {
             background: linear-gradient(145deg, var(--card-bg), #21354d);
             border-radius: 14px;
-            padding: 1.5rem;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            padding: 1.2rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.3);
             border: 1px solid rgba(102, 192, 244, 0.1);
-            transition: transform 0.3s ease;
             display: flex;
             flex-direction: column;
-            min-height: 400px;
-            max-width: 100%;
+            min-height: 380px;
         }
 
         .game-card:hover {
@@ -137,32 +124,32 @@
 
         .game-image {
             width: 100%;
-            height: 170px;
+            height: 160px;
             object-fit: contain;
             border-radius: 10px;
             margin-bottom: 1rem;
         }
 
         .game-title {
-            margin: 0.6rem 0 0.4rem 0;
+            margin: 0.5rem 0;
             color: var(--primary-color);
-            font-size: 1.15rem;
-            height: 3em;
-            overflow: hidden;
+            font-size: 1.1rem;
+            height: 2.8em;
             display: -webkit-box;
+            overflow: hidden;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
         }
 
         .game-price {
             color: #8fbc8f;
-            font-size: 1.1rem;
-            margin: 0.4rem 0 1rem 0;
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
         }
 
         .detail-button {
-            width: 100%;
-            padding: 0.85rem;
+            margin-top: auto;
+            padding: 0.75rem;
             background: linear-gradient(to bottom, var(--primary-color), #4fa8d3);
             color: white;
             border: none;
@@ -170,7 +157,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
-            margin-top: auto;
         }
 
         .detail-button:hover {
@@ -180,10 +166,10 @@
 
         .refresh-button {
             position: fixed;
-            right: 40px;
-            bottom: 40px;
-            width: 60px;
-            height: 60px;
+            right: 30px;
+            bottom: 30px;
+            width: 58px;
+            height: 58px;
             border-radius: 50%;
             background: linear-gradient(135deg, #4fa8d3 0%, #66c0f4 100%);
             border: none;
@@ -203,27 +189,28 @@
         .refresh-button::before {
             content: "⟳";
             color: white;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: bold;
         }
     </style>
 </head>
 <body>
-<div class="sidebar">
-    <div class="sidebar-header">
+
+<!-- 顶部导航栏 -->
+<div class="topbar">
+    <div class="topbar-inner">
         <h2>游戏平台</h2>
-    </div>
-    <ul class="nav-links">
-        <li><a href="${pageContext.request.contextPath}/jsp/gameShop.jsp">前往搜索页面</a></li>
-        <li><a href="${pageContext.request.contextPath}/jsp/userData.jsp">前往用户页面</a></li>
-    </ul>
-    <div class="form-container">
-        <form action="${pageContext.request.contextPath}/game/findGameByUser.do" method="post">
-            <input type="submit" class="form-button" value="查看我的库存"/>
-        </form>
+        <div class="topbar-nav">
+            <a href="${pageContext.request.contextPath}/jsp/gameShop.jsp">前往搜索页面</a>
+            <a href="${pageContext.request.contextPath}/jsp/userData.jsp">前往用户页面</a>
+            <form action="${pageContext.request.contextPath}/game/findGameByUser.do" method="post" style="display:inline;">
+                <input type="submit" class="form-button" value="查看我的库存"/>
+            </form>
+        </div>
     </div>
 </div>
 
+<!-- 主内容区域 -->
 <div class="main-content">
     <div class="game-grid">
         <c:forEach var="game" items="${randomGames}">
@@ -240,8 +227,11 @@
     </div>
 </div>
 
+<!-- 刷新按钮 -->
 <form action="${pageContext.request.contextPath}/user/mainPage.do" method="get">
     <button type="submit" class="refresh-button"></button>
 </form>
+
 </body>
 </html>
+

@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html lang="zh-CN">
 
 
@@ -35,10 +36,14 @@
             align-items: center;
             min-height: 100vh;
             color: var(--text-color);
-            background-image: radial-gradient(circle at 20% 30%, rgba(102, 192, 244, 0.1) 0%, transparent 30%),
-            radial-gradient(circle at 80% 70%, rgba(102, 192, 244, 0.1) 0%, transparent 30%);
             position: relative;
             overflow-x: hidden;
+            background-image: url('https://p.sda1.dev/24/bd38b2c348a49d2bd247b41ce4e27e08/bg.png');
+            radial-gradient(circle at 20% 30%, rgba(102, 192, 244, 0.1) 0%, transparent 30%),
+            radial-gradient(circle at 80% 70%, rgba(102, 192, 244, 0.1) 0%, transparent 30%);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         body::before {
